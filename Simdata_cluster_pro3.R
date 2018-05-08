@@ -5,9 +5,9 @@ phi = c(0,0.001,0.01,0.1,1)
 psi = phi
 sA = 0.5
 sD = 0.5
-ticks = 10000
+ticks = 60000
 ranseed = 96
-L = 25
+L_size = 25
 v = 0.001
 # source("/home/p274981/MMM_sim_cluster.R")
   # mainDir = "/home/p274981/Proj2/"
@@ -20,16 +20,17 @@ replicate = length(phi)
   for (i in 1:replicate){
     phisetup = phi[i]
     for (j in 1:replicate){
-    
+    for(seed in 1:100){
     psisetup = psi[j]
  
-    result = pojce(phi=phisetup, psi=psisetup, sA=sA, sD=sD, ticks=ticks, randomSeed=ranseed, L=L, v=v)
-    file = paste("C:/Liang/Googlebox/Research/Project3/simdata/",i,"phi",j,"psi","sim.Rdata",sep = "")
+    result = pojce(phi=phisetup, psi=psisetup, sA=sA, sD=sD, ticks=ticks, randomSeed=seed, L=L_size, v=v)
+    file = paste("C:/Liang/Googlebox/Research/Project3/simdata/",i,"phi",j,"psi","sim",seed,".Rdata",sep = "")
     # file = paste("/home/p274981/cluster/",n,"Modeltestgroup",age,"age",num,"/out",i,"sim.Rdata",sep = "")
     
     # setwd(file.path(mainDir, subDir))
     # file = paste("/Users/mac/Dropbox/R/cluster/Modeltestgroupmu/out",i,"sim.Rdata",sep = "")
     save(result,file = file)
+    }
     }
   }
 
