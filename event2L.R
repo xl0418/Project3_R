@@ -22,16 +22,19 @@ event2L = function(result){
         L_block = rbind(L_block,L_raw[(ext_rownum[i]+1):(ext_rownum[i+1]-1),,drop = FALSE])
         row_index_ext = which(L_block[,3]%in% ext_vector[i,3] )
         row_ext =row_index_ext[length(row_index_ext)]
+        L_block[which(L_block[,3]>ext_vector[i,3]),3] =  L_block[which(L_block[,3]>ext_vector[i,3]),3]-1
         L_exi[row_ext,4] = ext_vector[i,1]
-        # par_branch = which(L_block[,3]%in% ext_vector[i,3] )
+        L_block[row_ext,3] = -1
+     
       }
       else{
-        ext_vector_updata = c(L_block[1:(row_ext-1),3],(L_block[row_ext:nrow(L_block),3]-1))
-        ext_vector_updata[row_ext] = -1
+        ext_vector_updata = L_block[,3]
          row_index_ext = which(ext_vector_updata %in% ext_vector[i,3] )
         row_ext =row_index_ext[length(row_index_ext)]
         L_exi[row_ext,4] = ext_vector[i,1]
-        # par_branch = which(L_block[,3]%in% ext_vector[i,3] )
+        L_block[row_ext,3] = -1        
+        L_block[which(L_block[,3]>ext_vector[i,3]),3] =  L_block[which(L_block[,3]>ext_vector[i,3]),3]-1
+        
       }
     }
     L_exi[,3] = c(1:nrow(L_exi))
