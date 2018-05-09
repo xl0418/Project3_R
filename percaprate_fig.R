@@ -3,7 +3,11 @@ library(plot3D)
 library(rgl)
 library(plot3Drgl)
 library(DDD)
+library(ggplot2)
 source('C:/Liang/Googlebox/Research/Project3/Project3_R/event2L.R', echo=TRUE)
+
+library(car)
+
 
 phi = 0.1
 psi = phi
@@ -18,7 +22,7 @@ result = pojce(phi=phi, psi=psi, sA=sA, sD=sD, ticks=ticks, randomSeed=5, L=L_si
 L = event2L(result = result)
 phy = DDD::L2phylo(L,dropextinct =F)
 
-plot(phy)
+plot(phy,show.tip.label = F)
 print(result$events)
 print(length(which(L[,4]==-1)) == result$events$ns[length(result$events$ns)])
 
@@ -76,11 +80,13 @@ per_cap_col_dataframe = cbind(phi_axis,psi_axis,per_cap_col_dataframe)
 
 
 ## example data (on my env, plotrgl(some_graph) crushes Rstudio, so I used volcano)
-volc <- reshape2::melt(volcano)  
 
-with(per_cap_col_dataframe, scatter3D(x = phi_axis, y = psi_axis, z = spec1, ticktype="detailed", pch=16, 
+with(per_cap_col_dataframe, scatter3D(x = phi_axis, y = psi_axis, z = spec12, ticktype="detailed", pch=16, 
                      xlab="phi", ylab="psi", zlab="per capita probability", main=""))
 plotrgl(lighting = TRUE, smooth = TRUE, cex=2)
+
+
+scatter3d(x = phi_axis, y = psi_axis, z = per_cap_col_dataframe$spec12,point.col = "blue", surface=FALSE)
 
 ## When graph is made, the left panel is focused
 title3d(main = "Earthquakes off Fiji", line=4, cex=2)
@@ -94,4 +100,17 @@ title3d("Magnitude", cex = 2, line = 0.8)
 
 next3d(clear = F) # if you want to refocus the left panel
 
+
+#heatmap
+ggplot(per_cap_col_dataframe, aes(phi_axis, psi_axis )) +
+  geom_tile(aes(fill = spec11), color = "white") +
+  scale_fill_gradient(low = "red", high = "green",limits = range(0,1)) +
+  ylab("psi") +
+  xlab("phi") +
+  theme(legend.title = element_text(size = 10),
+        legend.text = element_text(size = 12),
+        plot.title = element_text(size=16),
+        axis.title=element_text(size=14,face="bold"),
+        axis.text.x = element_text(angle = 90, hjust = 1)) +
+  labs(fill = "per capita probability")
 
