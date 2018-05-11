@@ -81,7 +81,7 @@ per_cap_col_dataframe = cbind(phi_axis,psi_axis,per_cap_col_dataframe)
 
 ## example data (on my env, plotrgl(some_graph) crushes Rstudio, so I used volcano)
 
-with(per_cap_col_dataframe, scatter3D(x = phi_axis, y = psi_axis, z = spec12, ticktype="detailed", pch=16, 
+with(per_cap_col_dataframe, scatter3D(x = phi_axis, y = psi_axis, z = spec1, ticktype="detailed", pch=16, 
                      xlab="phi", ylab="psi", zlab="per capita probability", main=""))
 plotrgl(lighting = TRUE, smooth = TRUE, cex=2)
 

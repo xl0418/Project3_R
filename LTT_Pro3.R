@@ -37,11 +37,6 @@ psi_group = c(1:5)
     data = NULL
     print(count1)
     for (seed in 1:100) {
-      # 
-      # if(Scenario == 2) file = paste("/Volumes/Liang/Research/data/cluster_Kpri_40/",j,"Modeltestgroup",age,"age",num,"/out",i,"sim.Rdata",sep = "")
-      # if(Scenario == 1) file = paste("/Volumes/Liang/Research/data/cluster_Kpri_20/",j,"Modeltestgroup",age,"age",num,"/out",i,"sim.Rdata",sep = "")
-      # if(Scenario == 3) file = paste("/Volumes/Liang/Research/data/cluster_Kpri_20V40/",j,"Modeltestgroup",age,"age",num,"/out",i,"sim.Rdata",sep = "")
-      # 
       file = paste("C:/Liang/Googlebox/Research/Project3/simdata/",i,"phi",j,"psi","sim",seed,".Rdata",sep = "")
       load(file = file)
       age = result$log$sT[length(result$log$sT)]

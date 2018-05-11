@@ -5,7 +5,7 @@ phi = c(0,0.001,0.01,0.1,1)
 psi = phi
 sA = 1000
 sD = 1000
-ticks = 20000
+ticks = 40000
 L_size = 25
 v = 0.001
 # source("/home/p274981/MMM_sim_cluster.R")
